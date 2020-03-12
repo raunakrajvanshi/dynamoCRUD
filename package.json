@@ -1,0 +1,21 @@
+{
+  "name": "techb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "npm run clean && npm run build && aws lambda update-function-code --function-name employees --zip-file fileb://build.zip --publish",
+    "clean": "rm build.zip",
+    "build": "zip -r build.zip node_modules index.js app.js routes.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.637.0",
+    "aws-serverless-express": "^3.3.6",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "uuid": "^7.0.2"
+  }
+}
