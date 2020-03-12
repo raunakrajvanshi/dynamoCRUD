@@ -1,6 +1,6 @@
 const AWS = require("aws-sdk");
 const express = require("express");
-const uuid = require("uuid");
+const uuid = require("uuid"); //To generate unique id's
 const IS_OFFLINE = process.env.NODE_ENV !== "production";
 const EMPLOYEES_TABLE = process.env.TABLE;
 const dynamoDb =
@@ -11,6 +11,9 @@ const dynamoDb =
       })
     : new AWS.DynamoDB.DocumentClient();
 const router = express.Router();
+
+//GET
+
 router.get("/employees", (req, res) => {
   const params = {
     TableName: EMPLOYEES_TABLE
@@ -41,6 +44,9 @@ router.get("/employees/:id", (req, res) => {
     }
   });
 });
+
+//POST METHOD
+
 router.post("/employees", (req, res) => {
   const name = req.body.name;
   const id = uuid.v4();
@@ -61,6 +67,9 @@ router.post("/employees", (req, res) => {
     });
   });
 });
+
+//DELETE
+
 router.delete("/employees/:id", (req, res) => {
   const id = req.params.id;
   const params = {
